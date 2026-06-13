@@ -289,3 +289,92 @@
     line-height: 1.5 !important;
   }
 }
+/* ==========================================================================
+   Article Reader — Mobile Responsive
+   ========================================================================== */
+
+@media (max-width: 767px) {
+
+  /* Main container: tighter padding on phone */
+  main.container {
+    padding: 16px 14px 60px !important;
+  }
+
+  /* Article header: left-align on phone */
+  .article-header {
+    text-align: left !important;
+    margin-bottom: 20px !important;
+  }
+
+  .article-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    letter-spacing: -0.3px;
+    margin: 10px 0 12px;
+  }
+
+  .article-standfirst {
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  /* Meta row: wrap items, smaller font */
+  .article-meta-row {
+    flex-wrap: wrap !important;
+    gap: 8px 12px !important;
+    justify-content: flex-start !important;
+    font-size: 0.72rem !important;
+    padding: 8px 0 !important;
+    margin-top: 16px !important;
+  }
+  /* Hide bullets between meta items on very small screens */
+  .article-meta-row > span {
+    display: none;
+  }
+
+  /* Body text: slightly smaller on phone */
+  .article-text-content {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Drop-cap: smaller on phone */
+  .dropcap::first-letter {
+    font-size: 3.2rem;
+    margin-right: 8px;
+  }
+
+  /* Pullquote: narrower border */
+  .editorial-pullquote {
+    font-size: 1.1rem;
+    margin: 20px 0;
+    padding-left: 14px;
+  }
+
+  /* Share bar stays horizontal row on mobile */
+  .sticky-share-bar {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    padding: 10px 0 14px !important;
+    position: static !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    margin-bottom: 20px !important;
+  }
+
+  .share-icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  /* Related articles column: single column */
+  .related-column {
+    padding-top: 20px;
+  }
+
+  /* Reader layout: single column, no gap waste */
+  .reader-layout {
+    gap: 0;
+  }
+}

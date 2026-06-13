@@ -208,9 +208,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .masthead {
-  padding: 25px 0 15px;
+  padding: 16px 0;
   text-align: center;
   position: relative;
+}
+
+.masthead > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Invisible spacer mirrors the controls width on the left for true centering */
+.masthead-spacer {
+  width: 96px;
+  flex-shrink: 0;
+}
+
+.masthead-center {
+  flex: 1;
+  text-align: center;
+}
+
+.masthead-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 96px;
+  justify-content: flex-end;
 }
 
 .masthead-logo {
@@ -234,15 +261,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 
-.masthead-controls {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
 
 .masthead-btn {
   background: none;
@@ -1154,17 +1172,251 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-color);
 }
 
+
+/* ==========================================================================
+   RESPONSIVE — Mobile First Overhaul
+   ========================================================================== */
+
+/* ── Show mobile sticky bottom nav on phones ──────────────────────────── */
 @media (max-width: 767px) {
   .mobile-nav {
     display: block;
   }
   body {
-    padding-bottom: 60px; /* offset for mobile sticky nav */
+    padding-bottom: 68px; /* room for sticky bottom nav */
+  }
+
+  /* ── Container padding ─────────────────────────────────────────────── */
+  .container {
+    padding: 0 14px;
+  }
+
+  /* ── Top bar: hide non-essential items, keep edition + sign-in ──────── */
+  .top-bar {
+    font-size: 0.7rem;
+    padding: 6px 0;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .top-bar-left {
+    gap: 6px;
+  }
+  /* Hide date and volume on very small screens */
+  #header-date,
+  #volume-indicator {
+    display: none;
+  }
+  /* Hide E-paper link on mobile */
+  .epaper-link {
+    display: none;
+  }
+  .top-bar-right {
+    gap: 8px;
+  }
+  .country-select {
+    max-width: 100px;
+    font-size: 0.7rem;
+    padding: 2px 4px;
+  }
+
+  /* ── Masthead ──────────────────────────────────────────────────────── */
+  .masthead {
+    padding: 12px 0;
+  }
+  .masthead > .container {
+    gap: 8px;
+  }
+  .masthead-spacer {
+    width: 80px;
   }
   .masthead-controls {
-    display: none; /* Controls move to footer or top bar on mobile */
+    width: 80px;
+    gap: 4px;
+  }
+  .masthead-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+  }
+  .masthead-logo {
+    font-size: clamp(1.6rem, 7vw, 2.6rem);
+    letter-spacing: -0.5px;
+  }
+  .masthead-tagline {
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    margin-top: 2px;
+  }
+
+  /* ── Nav bar: scrollable, smaller text ─────────────────────────────── */
+  .nav-bar {
+    gap: 16px;
+    padding: 8px 0;
+    justify-content: flex-start;
+    padding-left: 14px;
+  }
+  .nav-item {
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    padding: 4px 0;
+  }
+
+  /* ── Breaking Ticker ───────────────────────────────────────────────── */
+  .ticker-title {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    margin-right: 8px;
+  }
+  .ticker-wrap {
+    font-size: 0.72rem;
+  }
+
+  /* ── Hero section ──────────────────────────────────────────────────── */
+  .hero-section {
+    padding: 16px 0;
+  }
+  .hero-title {
+    font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+    margin: 8px 0 10px;
+  }
+  .hero-summary {
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .hero-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* ── Editor Picks ──────────────────────────────────────────────────── */
+  .editor-picks {
+    padding: 16px 0;
+  }
+  .editor-picks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* ── Homepage columns: single column ───────────────────────────────── */
+  .homepage-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px 0;
+  }
+  .column-left,
+  .column-center,
+  .column-right {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* ── Section headers ───────────────────────────────────────────────── */
+  .section-header {
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+  }
+
+  /* ── Cards ─────────────────────────────────────────────────────────── */
+  .paper-card {
+    padding: 12px;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-summary {
+    font-size: 0.82rem;
+    -webkit-line-clamp: 2;
+  }
+
+  /* ── Search overlay ────────────────────────────────────────────────── */
+  .search-overlay-content {
+    padding: 16px;
+  }
+  .search-overlay-input {
+    font-size: 1.3rem;
+  }
+  .search-overlay-close {
+    top: 16px;
+    right: 16px;
+    font-size: 1.6rem;
+  }
+
+  /* ── Article Reader ────────────────────────────────────────────────── */
+  .article-hero-image {
+    aspect-ratio: 16/9;
+  }
+  .article-body {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* ── Category page grid ────────────────────────────────────────────── */
+  #category-articles-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Search page ────────────────────────────────────────────────────── */
+  .search-card-thumb {
+    width: 80px;
+    height: 62px;
+  }
+  .search-card-inner {
+    gap: 10px;
+  }
+
+  /* ── Footer ─────────────────────────────────────────────────────────── */
+  .footer {
+    padding: 30px 0 16px;
+    margin-top: 30px;
+  }
+  .footer-grid {
+    gap: 24px;
+  }
+
+  /* ── Bookmarks page ─────────────────────────────────────────────────── */
+  #bookmarks-grid {
+    grid-template-columns: 1fr !important;
   }
 }
+
+/* ── Slightly-larger phones / big phablets (480px+) ───────────────────── */
+@media (min-width: 480px) and (max-width: 767px) {
+  .editor-picks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #category-articles-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── Tablets (768px – 1023px) ─────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .masthead-logo {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+  }
+  .masthead-spacer,
+  .masthead-controls {
+    width: 90px;
+  }
+  .homepage-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .column-right {
+    grid-column: 1 / -1; /* widgets span full width on tablet */
+  }
+  .editor-picks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nav-bar {
+    gap: 18px;
+  }
+}
+
 
 /* ==========================================================================
    Search Result Cards – Live News Layout
