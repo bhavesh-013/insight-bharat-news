@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category News | Insight Samachar</title>
+  <meta name="description" content="Browse curated news categories from Insight Samachar.">
+  
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/category.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="border-single-bottom">
+    <div class="container">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <span id="edition-indicator"><i class="ri-sun-fill"></i> Morning Edition</span>
+          <span>•</span>
+          <span id="header-date">Friday, June 12, 2026</span>
+          <span>•</span>
+          <span id="volume-indicator">Vol. IV, No. 165</span>
+        </div>
+        <div class="top-bar-right">
+          <a href="#" class="subscribe-btn">Subscribe</a>
+          <a href="#" class="epaper-link"><i class="ri-newspaper-line"></i> E-Paper</a>
+          <select id="country-selector" class="country-select">
+            <option value="in" selected>India Edition</option>
+            <option value="us">US Edition</option>
+            <option value="gb">UK Edition</option>
+          </select>
+          <div id="auth-status" class="auth-status-container">
+            <a href="login.html" id="login-link"><i class="ri-user-line"></i> Sign In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container">
+      <a href="index.html" class="masthead-logo">Insight Samachar</a>
+      <p class="masthead-tagline">Truth Beyond Headlines</p>
+      
+      <div class="masthead-controls">
+        <button class="masthead-btn" id="search-trigger" aria-label="Search articles">
+          <i class="ri-search-line"></i>
+        </button>
+        <button class="masthead-btn" id="theme-toggle" aria-label="Toggle Night Edition">
+          <i class="ri-moon-line" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-container border-double">
+    <div class="container">
+      <ul class="nav-bar" id="main-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item" data-category="world"><a href="category.html?cat=world">World</a></li>
+        <li class="nav-item" data-category="politics"><a href="category.html?cat=politics">Politics</a></li>
+        <li class="nav-item" data-category="business"><a href="category.html?cat=business">Business</a></li>
+        <li class="nav-item" data-category="technology"><a href="category.html?cat=technology">Technology</a></li>
+        <li class="nav-item" data-category="sports"><a href="category.html?cat=sports">Sports</a></li>
+        <li class="nav-item" data-category="entertainment"><a href="category.html?cat=entertainment">Entertainment</a></li>
+        <li class="nav-item" data-category="science"><a href="category.html?cat=science">Science</a></li>
+        <li class="nav-item" data-category="health"><a href="category.html?cat=health">Health</a></li>
+        <li class="nav-item" data-category="opinion"><a href="category.html?cat=opinion">Opinion</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Grid Wrapper -->
+  <main class="container fade-in" style="padding: 40px 20px;">
+    
+    <div class="category-header-wrap border-bottom-double" style="margin-bottom: 30px; padding-bottom: 15px; text-align: center;">
+      <h2 class="category-page-title" id="category-page-title">Technology</h2>
+      <p class="category-page-subtitle" id="category-page-subtitle">Reports and briefs tracking the digital frontier and hardware updates.</p>
+    </div>
+
+    <!-- Category Layout Grid -->
+    <div class="category-layout">
+      
+      <!-- Primary grid for feed items -->
+      <div class="category-grid" id="category-articles-grid">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Skeletons while loading -->
+      <div id="category-skeletons" style="display: none; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; width: 100%;">
+        <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text skeleton-title"></div></div>
+        <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text skeleton-title"></div></div>
+        <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text skeleton-title"></div></div>
+      </div>
+
+    </div>
+
+    <!-- Pagination controls -->
+    <div class="pagination-container" id="pagination-container">
+      <button class="pagination-btn" id="prev-page-btn" disabled><i class="ri-arrow-left-s-line"></i> Previous</button>
+      <div class="pagination-numbers" id="pagination-numbers">
+        <span class="page-number active">1</span>
+      </div>
+      <button class="pagination-btn" id="next-page-btn">Next <i class="ri-arrow-right-s-line"></i></button>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 Insight Samachar. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay-close" id="search-close-btn" aria-label="Close overlay">&times;</button>
+    <div class="search-overlay-content">
+      <div class="search-overlay-input-wrap">
+        <input type="text" class="search-overlay-input" id="search-input" placeholder="Search the archive...">
+        <button class="search-overlay-btn" id="search-submit-btn" aria-label="Submit query">
+          <i class="ri-search-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Bottom Nav -->
+  <div class="mobile-nav">
+    <ul class="mobile-nav-bar">
+      <li class="mobile-nav-item">
+        <a href="index.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-home-line"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item active">
+        <a href="category.html?cat=technology" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-grid-line"></i>
+          <span>Sections</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item" id="mobile-search-trigger">
+        <a href="#" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-search-line"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="bookmarks.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-bookmark-line"></i>
+          <span>Saved</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="login.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-user-line"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/category.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "insight-samachar",
+  "version": "1.0.0",
+  "description": "Premium Editorial News Application called Insight Samachar",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 3000",
+    "dev": "npx http-server -p 3000"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": [
+    "newspaper",
+    "newsapi",
+    "editorial",
+    "day-night-themes"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}

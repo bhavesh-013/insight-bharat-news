@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search News | Insight Samachar</title>
+  <meta name="description" content="Search breaking news and live updates from Insight Samachar – powered by NewsAPI.">
+  
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Top Bar -->
+  <div class="border-single-bottom">
+    <div class="container">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <span id="edition-indicator"><i class="ri-sun-fill"></i> Morning Edition</span>
+          <span>•</span>
+          <span id="header-date">Friday, June 12, 2026</span>
+          <span>•</span>
+          <span id="volume-indicator">Vol. IV, No. 165</span>
+        </div>
+        <div class="top-bar-right">
+          <a href="#" class="subscribe-btn">Subscribe</a>
+          <a href="#" class="epaper-link"><i class="ri-newspaper-line"></i> E-Paper</a>
+          <select id="country-selector" class="country-select">
+            <option value="in" selected>India Edition</option>
+            <option value="us">US Edition</option>
+            <option value="gb">UK Edition</option>
+          </select>
+          <div id="auth-status" class="auth-status-container">
+            <a href="login.html" id="login-link"><i class="ri-user-line"></i> Sign In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container">
+      <a href="index.html" class="masthead-logo">Insight Samachar</a>
+      <p class="masthead-tagline">Truth Beyond Headlines</p>
+      
+      <div class="masthead-controls">
+        <button class="masthead-btn" id="search-trigger" aria-label="Search articles">
+          <i class="ri-search-line"></i>
+        </button>
+        <button class="masthead-btn" id="theme-toggle" aria-label="Toggle Night Edition">
+          <i class="ri-moon-line" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-container border-double">
+    <div class="container">
+      <ul class="nav-bar" id="main-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item" data-category="world"><a href="category.html?cat=world">World</a></li>
+        <li class="nav-item" data-category="politics"><a href="category.html?cat=politics">Politics</a></li>
+        <li class="nav-item" data-category="business"><a href="category.html?cat=business">Business</a></li>
+        <li class="nav-item" data-category="technology"><a href="category.html?cat=technology">Technology</a></li>
+        <li class="nav-item" data-category="sports"><a href="category.html?cat=sports">Sports</a></li>
+        <li class="nav-item" data-category="entertainment"><a href="category.html?cat=entertainment">Entertainment</a></li>
+        <li class="nav-item" data-category="science"><a href="category.html?cat=science">Science</a></li>
+        <li class="nav-item" data-category="health"><a href="category.html?cat=health">Health</a></li>
+        <li class="nav-item" data-category="opinion"><a href="category.html?cat=opinion">Opinion</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Search Page Wrapper -->
+  <main class="container fade-in" style="min-height: 60vh; padding: 40px 20px;">
+    
+    <div style="text-align: center; max-width: 740px; margin: 0 auto 40px;">
+      <h2 class="section-header" style="justify-content: center; font-size: 1.6rem; margin-bottom: 8px;">Search Live News</h2>
+      <p style="font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-muted); margin-bottom: 22px;">Powered by NewsAPI &nbsp;•&nbsp; Results update as you type</p>
+      <div style="display: flex; gap: 10px; position: relative;">
+        <div class="search-input-wrap">
+          <input type="text" id="page-search-input" class="input-field" placeholder="Search news: e.g. India, AI, Cricket, Climate…" style="font-size: 1.05rem; padding: 12px 40px 12px 16px; width: 100%;" autocomplete="off" spellcheck="false">
+          <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search"><i class="ri-close-circle-fill"></i></button>
+        </div>
+        <button id="page-search-btn" class="btn btn-primary" style="padding: 0 25px; white-space: nowrap;"><i class="ri-search-line"></i> Search</button>
+      </div>
+      <!-- Trending quick tags -->
+      <div class="search-suggestions-tags" style="margin-top: 14px; justify-content: center; flex-wrap: wrap; gap: 8px;">
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">India</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">Artificial Intelligence</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">Cricket</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">ISRO</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">UPI</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">Climate</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">Technology</span>
+        <span class="suggestion-tag page-tag" style="font-size:0.75rem;">Markets</span>
+      </div>
+    </div>
+
+    <!-- Search Layout Column Grid -->
+    <div class="homepage-layout">
+      <!-- Left Column: Results List -->
+      <section class="column-center" style="grid-column: 1 / span 2; display: flex; flex-direction: column; gap: 20px;" id="search-results-section">
+        <div class="section-header" style="align-items: center; gap: 12px; flex-wrap: wrap;">
+          <span id="results-headline">Archive Results</span>
+          <span id="api-source-badge" class="api-badge" style="display: none;"></span>
+          <span id="results-count" style="font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-left: auto;">0 Articles</span>
+        </div>
+
+        <!-- Skeletons while loading -->
+        <div id="search-skeletons" style="display: none; flex-direction: column; gap: 20px;">
+          <div class="skeleton-card"><div class="skeleton-text skeleton-title"></div><div class="skeleton-text skeleton-para-1"></div></div>
+          <div class="skeleton-card"><div class="skeleton-text skeleton-title"></div><div class="skeleton-text skeleton-para-1"></div></div>
+        </div>
+
+        <!-- Rendered Results Grid -->
+        <div id="results-grid" style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+          <!-- Inject via JS -->
+        </div>
+
+        <!-- Empty State Illustration -->
+        <div id="no-results-state" class="empty-state" style="display: none;">
+          <span class="state-illustration">📯</span>
+          <h3 class="state-title">No Articles Found</h3>
+          <p class="state-desc" id="no-results-desc">Today's edition does not contain reports matching your keyword. Try checking your spelling or search another keyword.</p>
+          <div class="search-suggestions-tags" style="justify-content: center; margin-top: 15px;">
+            <span class="suggestion-tag page-tag">Climate Alliance</span>
+            <span class="suggestion-tag page-tag">Semiconductors</span>
+            <span class="suggestion-tag page-tag">UPI</span>
+            <span class="suggestion-tag page-tag">ISRO</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Search History Sidebar -->
+      <aside class="column-right">
+        <div class="widget">
+          <h4 class="section-header" style="font-size: 0.8rem; margin-bottom: 15px;">Search Archive History</h4>
+          <ul id="search-history-list" style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-family: var(--font-sans); font-size: 0.85rem;">
+            <!-- Inject via JS -->
+          </ul>
+          <div id="empty-history-msg" style="font-size: 0.8rem; color: var(--text-muted); text-align: center; padding: 15px 0;">
+            No search history yet.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 Insight Samachar. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Overlay (Required for global actions) -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay-close" id="search-close-btn" aria-label="Close overlay">&times;</button>
+    <div class="search-overlay-content">
+      <div class="search-overlay-input-wrap">
+        <input type="text" class="search-overlay-input" id="search-input" placeholder="Search the archive...">
+        <button class="search-overlay-btn" id="search-submit-btn" aria-label="Submit query">
+          <i class="ri-search-line"></i>
+        </button>
+      </div>
+      <p class="search-suggestions-title">Trending Editorial Topics</p>
+      <div class="search-suggestions-tags">
+        <span class="suggestion-tag">Climate Alliance</span>
+        <span class="suggestion-tag">Semiconductors</span>
+        <span class="suggestion-tag">UPI</span>
+        <span class="suggestion-tag">ISRO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Bottom Nav -->
+  <div class="mobile-nav">
+    <ul class="mobile-nav-bar">
+      <li class="mobile-nav-item">
+        <a href="index.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-home-line"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="category.html?cat=technology" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-grid-line"></i>
+          <span>Sections</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item active" id="mobile-search-trigger">
+        <a href="#" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-search-line"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="bookmarks.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-bookmark-line"></i>
+          <span>Saved</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="login.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-user-line"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main scripts -->
+  <script src="js/api.js"></script>
+  <!-- Reuse home.js controls for theme toggles, search overlays etc -->
+  <script src="js/home.js"></script>
+  <script src="js/search.js"></script>
+  <script>
+    // Clear button wiring (runs after search.js loads)
+    document.addEventListener('DOMContentLoaded', () => {
+      const input    = document.getElementById('page-search-input');
+      const clearBtn = document.getElementById('search-clear-btn');
+      if (!input || !clearBtn) return;
+
+      input.addEventListener('input', () => {
+        clearBtn.style.display = input.value.length > 0 ? 'block' : 'none';
+      });
+
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        clearBtn.style.display = 'none';
+        input.focus();
+        triggerSearch('');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register your premium account with Insight Samachar.">
+  <title>Sign Up | Insight Samachar</title>
+  
+  <!-- Remix Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="auth-page">
+  <div class="auth-wrapper fade-in">
+    <!-- Centered Signup Card -->
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <a href="index.html" class="auth-logo">Insight Samachar</a>
+        <p class="auth-tagline">Truth Beyond Headlines</p>
+        <div class="auth-edition-line">
+          <span>Morning Edition</span>
+          <span>•</span>
+          <span id="current-date">Friday, June 12, 2026</span>
+        </div>
+      </div>
+      
+      <div class="auth-card-body">
+        <h2 class="auth-title">Register Your Edition</h2>
+        <p class="auth-subtitle">Create an account to save bookmarks and receive our daily digest.</p>
+        
+        <!-- Error Banner -->
+        <div class="auth-error-banner" id="auth-error-banner">
+          <i class="ri-error-warning-line"></i>
+          <span id="error-message">Registration failed. Please try again.</span>
+        </div>
+
+        <form id="signup-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="fullname" class="form-label">Full Name</label>
+            <div class="form-input-wrapper">
+              <i class="ri-user-line input-icon"></i>
+              <input type="text" id="fullname" class="input-field" placeholder="Bhavesh Kumawat" required>
+            </div>
+            <span class="error-text" id="fullname-error">Please enter your full name.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <div class="form-input-wrapper">
+              <i class="ri-mail-line input-icon"></i>
+              <input type="email" id="email" class="input-field" placeholder="editor@insightsamachar.com" required>
+            </div>
+            <span class="error-text" id="email-error">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="country" class="form-label">Country of Residence</label>
+            <div class="form-input-wrapper">
+              <i class="ri-map-pin-line input-icon"></i>
+              <select id="country" class="input-field" required>
+                <option value="" disabled selected>Select your country</option>
+                <option value="IN">India</option>
+                <option value="US">United States</option>
+                <option value="GB">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="SG">Singapore</option>
+              </select>
+            </div>
+            <span class="error-text" id="country-error">Please select your country.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="form-input-wrapper">
+              <i class="ri-lock-line input-icon"></i>
+              <input type="password" id="password" class="input-field" placeholder="••••••••" required>
+              <button type="button" class="password-toggle" id="password-toggle" aria-label="Toggle Password Visibility">
+                <i class="ri-eye-off-line" id="toggle-icon"></i>
+              </button>
+            </div>
+            <span class="error-text" id="password-error">Password must be at least 6 characters long.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password" class="form-label">Confirm Password</label>
+            <div class="form-input-wrapper">
+              <i class="ri-lock-password-line input-icon"></i>
+              <input type="password" id="confirm-password" class="input-field" placeholder="••••••••" required>
+              <button type="button" class="password-toggle" id="confirm-password-toggle" aria-label="Toggle Confirm Password Visibility">
+                <i class="ri-eye-off-line" id="confirm-toggle-icon"></i>
+              </button>
+            </div>
+            <span class="error-text" id="confirm-password-error">Passwords do not match.</span>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="agree-terms" required>
+              <span class="checkmark"></span>
+              I agree to the Terms of Service & Privacy Policy
+            </label>
+            <span class="error-text" id="terms-error">You must agree to the Terms of Service.</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block auth-submit-btn">
+            Create Account & Read <i class="ri-arrow-right-line"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="auth-card-footer">
+        <p>Already a subscriber? <a href="login.html" class="auth-link">Sign In Here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

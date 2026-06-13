@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Reader | Insight Samachar</title>
+  <meta name="description" content="Read full coverage and editorial dispatches from Insight Samachar.">
+  
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/article.css">
+</head>
+<body class="reader-page">
+
+  <!-- Sticky Reading Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="reading-progress"></div>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="border-single-bottom">
+    <div class="container">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <span id="edition-indicator"><i class="ri-sun-fill"></i> Morning Edition</span>
+          <span>•</span>
+          <span id="header-date">Friday, June 12, 2026</span>
+          <span>•</span>
+          <span id="volume-indicator">Vol. IV, No. 165</span>
+        </div>
+        <div class="top-bar-right">
+          <a href="#" class="subscribe-btn">Subscribe</a>
+          <a href="#" class="epaper-link"><i class="ri-newspaper-line"></i> E-Paper</a>
+          <select id="country-selector" class="country-select">
+            <option value="in" selected>India Edition</option>
+            <option value="us">US Edition</option>
+            <option value="gb">UK Edition</option>
+          </select>
+          <div id="auth-status" class="auth-status-container">
+            <a href="login.html" id="login-link"><i class="ri-user-line"></i> Sign In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container">
+      <a href="index.html" class="masthead-logo">Insight Samachar</a>
+      <p class="masthead-tagline">Truth Beyond Headlines</p>
+      
+      <div class="masthead-controls">
+        <button class="masthead-btn" id="search-trigger" aria-label="Search articles">
+          <i class="ri-search-line"></i>
+        </button>
+        <button class="masthead-btn" id="theme-toggle" aria-label="Toggle Night Edition">
+          <i class="ri-moon-line" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-container border-double">
+    <div class="container">
+      <ul class="nav-bar" id="main-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item" data-category="world"><a href="category.html?cat=world">World</a></li>
+        <li class="nav-item" data-category="politics"><a href="category.html?cat=politics">Politics</a></li>
+        <li class="nav-item" data-category="business"><a href="category.html?cat=business">Business</a></li>
+        <li class="nav-item" data-category="technology"><a href="category.html?cat=technology">Technology</a></li>
+        <li class="nav-item" data-category="sports"><a href="category.html?cat=sports">Sports</a></li>
+        <li class="nav-item" data-category="entertainment"><a href="category.html?cat=entertainment">Entertainment</a></li>
+        <li class="nav-item" data-category="science"><a href="category.html?cat=science">Science</a></li>
+        <li class="nav-item" data-category="health"><a href="category.html?cat=health">Health</a></li>
+        <li class="nav-item" data-category="opinion"><a href="category.html?cat=opinion">Opinion</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Reader Layout -->
+  <main class="container fade-in" style="padding: 30px 20px 60px;">
+    
+    <!-- Breadcrumb back link -->
+    <div class="breadcrumb border-single-bottom" style="padding-bottom: 12px; margin-bottom: 30px;">
+      <a href="index.html" style="font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">
+        <i class="ri-arrow-left-line"></i> Back to Homepage
+      </a>
+    </div>
+
+    <!-- Article Header -->
+    <header class="article-header" style="max-width: 850px; margin: 0 auto 30px; text-align: center;">
+      <span class="category-badge" id="art-category">General Dispatch</span>
+      <h1 class="article-title" id="art-title">Loading Headline...</h1>
+      <p class="article-standfirst" id="art-summary">Loading editorial summary and report analysis.</p>
+      
+      <!-- Meta details -->
+      <div class="article-meta-row border-double" style="margin-top: 25px; padding: 10px 0; display: flex; justify-content: center; gap: 20px; font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-muted);">
+        <div>By <strong style="color: var(--text-primary);" id="art-author">Staff Reporter</strong></div>
+        <span>•</span>
+        <div id="art-date">Friday, June 12, 2026</div>
+        <span>•</span>
+        <div id="art-read-time"><i class="ri-time-line"></i> 5 min read</div>
+        <span>•</span>
+        <div>Source: <span id="art-source" style="font-weight: 600;">Insight Samachar</span></div>
+      </div>
+    </header>
+
+    <!-- Main Reader Columns Grid -->
+    <div class="reader-layout">
+      
+      <!-- Left side: Sticky Social sharing bar -->
+      <aside class="share-column">
+        <div class="sticky-share-bar" id="sticky-share-toolbar">
+          <button class="share-icon-btn bookmark-btn" id="art-bookmark-btn" aria-label="Bookmark this article">
+            <i class="ri-bookmark-line"></i>
+          </button>
+          <div class="share-divider"></div>
+          <button class="share-icon-btn" data-share="whatsapp" aria-label="Share on WhatsApp"><i class="ri-whatsapp-line"></i></button>
+          <button class="share-icon-btn" data-share="twitter" aria-label="Share on Twitter"><i class="ri-twitter-line"></i></button>
+          <button class="share-icon-btn" data-share="facebook" aria-label="Share on Facebook"><i class="ri-facebook-line"></i></button>
+          <button class="share-icon-btn" data-share="linkedin" aria-label="Share on LinkedIn"><i class="ri-linkedin-line"></i></button>
+          <button class="share-icon-btn" id="art-copy-link-btn" aria-label="Copy article link"><i class="ri-link"></i></button>
+          <button class="share-icon-btn" id="art-print-btn" aria-label="Print article"><i class="ri-printer-line"></i></button>
+        </div>
+      </aside>
+
+      <!-- Center: Main text body -->
+      <article class="article-body-column">
+        
+        <!-- Hero Featured Image -->
+        <div class="article-hero-img-container" style="border: 1px solid var(--border-color); margin-bottom: 30px;">
+          <img id="art-image" src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&auto=format&fit=crop&q=80" alt="News Image" style="width: 100%; height: auto; display: block;">
+        </div>
+
+        <!-- Dynamic Main Paragraphs -->
+        <div class="article-text-content" id="art-text-paragraphs">
+          <!-- Injected via JS -->
+        </div>
+
+        <div style="margin-top: 40px; display: flex; justify-content: center;" class="border-double" style="padding: 15px 0;">
+          <a id="art-original-link" href="#" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem;">
+            Read Original Publisher Article <i class="ri-external-link-line"></i>
+          </a>
+        </div>
+
+        <!-- Comments Section -->
+        <section class="comments-section" style="margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 40px;">
+          <h3 class="section-header" style="font-size: 1.2rem; margin-bottom: 25px;">
+            <span>Reader's Discourse</span>
+            <span id="comments-count" style="font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">0 Comments</span>
+          </h3>
+
+          <!-- Form to post comments -->
+          <div class="comment-post-box" style="margin-bottom: 35px;">
+            <p style="font-family: var(--font-sans); font-size: 0.8rem; margin-bottom: 8px; font-weight:600; text-transform:uppercase; color:var(--text-primary);">Post an Opinion</p>
+            <form id="comment-form" style="display: flex; flex-direction: column; gap: 12px;">
+              <textarea id="comment-text" class="input-field" rows="4" placeholder="Join the discussion. Maintain editorial decorum..." style="resize: vertical; font-family: var(--font-body); font-size: 0.95rem;" required></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="comment-auth-notice" style="font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted);">
+                  Posting as guest.
+                </span>
+                <button type="submit" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.75rem;">Post Comment</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- List of Comments -->
+          <div class="comments-list" id="comments-list">
+            <!-- Inject via JS -->
+          </div>
+        </section>
+
+      </article>
+
+      <!-- Right Column: Related Articles -->
+      <aside class="related-column">
+        <div class="widget">
+          <h4 class="section-header" style="font-size: 0.8rem; margin-bottom: 20px;">Related Dispatches</h4>
+          <div class="related-articles-stack" id="related-articles-container" style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Inject via JS -->
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 Insight Samachar. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay-close" id="search-close-btn" aria-label="Close overlay">&times;</button>
+    <div class="search-overlay-content">
+      <div class="search-overlay-input-wrap">
+        <input type="text" class="search-overlay-input" id="search-input" placeholder="Search the archive...">
+        <button class="search-overlay-btn" id="search-submit-btn" aria-label="Submit query">
+          <i class="ri-search-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Bottom Nav -->
+  <div class="mobile-nav">
+    <ul class="mobile-nav-bar">
+      <li class="mobile-nav-item">
+        <a href="index.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-home-line"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="category.html?cat=technology" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-grid-line"></i>
+          <span>Sections</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item" id="mobile-search-trigger">
+        <a href="#" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-search-line"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="bookmarks.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-bookmark-line"></i>
+          <span>Saved</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="login.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-user-line"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/article.js"></script>
+</body>
+</html>

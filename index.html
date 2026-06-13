@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Optimization -->
+  <title>Insight Bharat | Breaking News, Technology, Business, Sports & World News</title>
+  <meta name="description" content="Read the latest breaking news, technology updates, business insights, sports, science, and world headlines from Insight Samachar – a premium editorial digital newspaper.">
+  <link rel="canonical" href="index.html">
+  
+  <!-- Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Ticker dark theme override -->
+  <style>
+    .ticker-wrap { background: #1a1a1a !important; border-top: 3px solid #8b0000 !important; border-bottom: none !important; }
+    .ticker-items-container { background: #1a1a1a !important; }
+    .ticker-track { background: #1a1a1a !important; }
+    .ticker-item, .ticker-item a { color: #e5e5e5 !important; }
+    .ticker-title { background: #8b0000 !important; color: #fff !important; border-right: none !important; }
+  </style>
+  <style>
+    /* ── Breaking News Ticker overrides ── */
+    .ticker-wrap {
+      background: #1a1a1a !important;
+      border-top: 3px solid #8b0000 !important;
+      border-bottom: none !important;
+    }
+    .ticker-title {
+      background: #8b0000 !important;
+      color: #fff !important;
+    }
+    .ticker-items-container,
+    .ticker-track {
+      background: #1a1a1a !important;
+    }
+    .ticker-item,
+    .ticker-item a,
+    .ticker-track,
+    .ticker-track a {
+      color: #e5e5e5 !important;
+    }
+    .ticker-item a:hover { color: #fff !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="border-single-bottom">
+    <div class="container">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <span id="edition-indicator"><i class="ri-sun-fill"></i> Morning Edition</span>
+          <span>•</span>
+          <span id="header-date">Friday, June 12, 2026</span>
+          <span>•</span>
+          <span id="volume-indicator">Vol. IV, No. 165</span>
+        </div>
+        <div class="top-bar-right">
+          <a href="#" class="subscribe-btn">Subscribe</a>
+          <a href="#" class="epaper-link"><i class="ri-newspaper-line"></i> E-Paper</a>
+          <select id="country-selector" class="country-select">
+            <option value="in" selected>India Edition</option>
+            <option value="us">US Edition</option>
+            <option value="gb">UK Edition</option>
+          </select>
+          <div id="auth-status" class="auth-status-container">
+            <a href="login.html" id="login-link"><i class="ri-user-line"></i> Sign In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container">
+      <a href="index.html" class="masthead-logo">Insight Bharat</a>
+      <p class="masthead-tagline">Truth Beyond Headlines</p>
+      
+      <!-- Masthead controls (Search and Dark Mode) -->
+      <div class="masthead-controls">
+        <button class="masthead-btn" id="search-trigger" aria-label="Search articles">
+          <i class="ri-search-line"></i>
+        </button>
+        <button class="masthead-btn" id="theme-toggle" aria-label="Toggle Night Edition">
+          <i class="ri-moon-line" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-container border-double">
+    <div class="container">
+      <ul class="nav-bar" id="main-nav">
+        <li class="nav-item active"><a href="index.html">Home</a></li>
+        <li class="nav-item" data-category="world"><a href="category.html?cat=world">World</a></li>
+        <li class="nav-item" data-category="politics"><a href="category.html?cat=politics">Politics</a></li>
+        <li class="nav-item" data-category="business"><a href="category.html?cat=business">Business</a></li>
+        <li class="nav-item" data-category="technology"><a href="category.html?cat=technology">Technology</a></li>
+        <li class="nav-item" data-category="sports"><a href="category.html?cat=sports">Sports</a></li>
+        <li class="nav-item" data-category="entertainment"><a href="category.html?cat=entertainment">Entertainment</a></li>
+        <li class="nav-item" data-category="science"><a href="category.html?cat=science">Science</a></li>
+        <li class="nav-item" data-category="health"><a href="category.html?cat=health">Health</a></li>
+        <li class="nav-item" data-category="opinion"><a href="category.html?cat=opinion">Opinion</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Breaking News Ticker -->
+  <div class="ticker-wrap" style="background:#1a1a1a; border-top:3px solid #8b0000; border-bottom:none; padding:0;">
+    <div class="ticker-title" style="background:#8b0000; color:#fff; font-family:var(--font-sans); font-size:0.7rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; padding:0 18px; display:flex; align-items:center; gap:7px; flex-shrink:0; height:100%;">
+      <i class="ri-flashlight-fill" style="font-size:0.85rem;"></i> Breaking
+    </div>
+    <div class="ticker-items-container" style="background:#1a1a1a;">
+      <div class="ticker-track" id="ticker-track" style="color:#e5e5e5;">
+        <!-- Injected via JS -->
+        <span class="ticker-item" style="color:#e5e5e5;">Loading latest news updates...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section border-single-bottom fade-in">
+    <div class="container">
+      <div id="hero-placeholder" class="skeleton-card" style="display:none;">
+        <div class="skeleton-img"></div>
+        <div class="skeleton-text skeleton-title"></div>
+        <div class="skeleton-text skeleton-para-1"></div>
+        <div class="skeleton-text skeleton-para-2"></div>
+      </div>
+      <div class="hero-grid" id="hero-container">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Editor Picks Section -->
+  <section class="editor-picks border-single-bottom fade-in">
+    <div class="container">
+      <div class="section-header" style="align-items: center; gap: 12px;">
+        <span>Today's Headlines</span>
+        <span id="home-api-badge" style="display:none;"></span>
+      </div>
+      <div class="editor-picks-grid" id="editor-picks-container">
+        <!-- Injected dynamically via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Grid Layout -->
+  <main class="container fade-in">
+    <div class="homepage-layout">
+      
+      <!-- Left Column: Featured Stories -->
+      <section class="column-left" id="left-column">
+        <div class="section-header">
+          <span>Featured Stories</span>
+        </div>
+        <div class="column-left-content" id="left-column-container" style="display: flex; flex-direction: column; gap: 20px;">
+          <!-- Injected dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- Center Column: Latest Headlines -->
+      <section class="column-center" id="center-column">
+        <div class="section-header">
+          <span>Latest Headlines</span>
+        </div>
+        <div class="column-center-content" id="center-column-container" style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Injected dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- Right Column: Widgets -->
+      <aside class="column-right">
+        
+        <!-- API Settings Widget (For testing/live API keys) -->
+        <div class="widget">
+          <h4 class="section-header" style="font-size: 0.8rem; margin-bottom: 12px;">NewsAPI Settings</h4>
+          <div style="font-size: 0.8rem; margin-bottom: 10px;">
+            Input your NewsAPI Key to load real-time headlines. Leave empty to use local editorial archive.
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <input type="password" id="api-key-input" class="input-field" placeholder="Paste NewsAPI Key..." style="padding: 6px 10px;">
+            <button id="save-key-btn" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.7rem;">Save</button>
+          </div>
+          <div id="api-key-status" style="font-size: 0.75rem; margin-top: 6px; color: var(--gold-color); display: none;">
+            Key applied successfully.
+          </div>
+        </div>
+
+        <!-- Weather Widget -->
+        <div class="widget weather-widget">
+          <div class="weather-header">
+            <span>Local Weather</span>
+            <span id="weather-date">June 12</span>
+          </div>
+          <div class="weather-temp-box">
+            <span class="weather-icon" id="weather-icon"><i class="ri-sun-cloudy-line" style="color: var(--gold-color);"></i></span>
+            <span class="weather-temp" id="weather-temp">32°C</span>
+          </div>
+          <div class="weather-cond" id="weather-condition">Partly Cloudy</div>
+          <div class="weather-details">
+            <div>
+              <i class="ri-temp-hot-line"></i> Humidity: <span id="weather-humidity">64%</span>
+            </div>
+            <div>
+              <i class="ri-windy-line"></i> Wind: <span id="weather-wind">14 km/h</span>
+            </div>
+          </div>
+          <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.5px;">
+            Location: <span id="weather-city">New Delhi, IN</span>
+          </div>
+        </div>
+
+        <!-- Market Widget -->
+        <div class="widget">
+          <div class="section-header" style="font-size: 0.8rem; margin-bottom: 15px;">
+            <span>Markets & Indices</span>
+          </div>
+          <div id="market-container">
+            <!-- Injected dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Newsletter Widget -->
+        <div class="widget newsletter-widget">
+          <div class="section-header" style="font-size: 0.8rem; margin-bottom: 15px;">
+            <span>Daily Dispatch</span>
+          </div>
+          <p>Subscribe to our editorial brief and get curated summaries delivered directly to your inbox every morning.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" class="input-field" placeholder="Enter your email address" required id="newsletter-email">
+            <button type="submit" class="btn btn-primary btn-block">Subscribe</button>
+          </form>
+          <div class="newsletter-success" id="newsletter-success">
+            <i class="ri-checkbox-circle-fill"></i> Thank you! You have subscribed to the Morning Edition.
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#111; color:#ccc; border-top:3px solid #8b0000; margin-top:40px;">
+
+    <!-- Masthead row -->
+    <div style="text-align:center; padding:48px 20px 32px; border-bottom:1px solid #2a2a2a;">
+      <div style="font-family:var(--font-serif); font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:#fff; letter-spacing:-0.01em; line-height:1;">Insight Bharat</div>
+      <div style="font-family:var(--font-sans); font-size:0.75rem; letter-spacing:0.18em; text-transform:uppercase; color:#888; margin-top:8px;">&ldquo;Truth Beyond Headlines&rdquo;</div>
+      <div style="display:flex; justify-content:center; gap:20px; margin-top:20px;">
+        <a href="#" aria-label="Twitter"  style="color:#888; font-size:1.2rem; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><i class="ri-twitter-fill"></i></a>
+        <a href="#" aria-label="Facebook" style="color:#888; font-size:1.2rem; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><i class="ri-facebook-fill"></i></a>
+        <a href="#" aria-label="Instagram" style="color:#888; font-size:1.2rem; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><i class="ri-instagram-fill"></i></a>
+        <a href="#" aria-label="LinkedIn" style="color:#888; font-size:1.2rem; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><i class="ri-linkedin-fill"></i></a>
+        <a href="#" aria-label="YouTube" style="color:#888; font-size:1.2rem; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><i class="ri-youtube-fill"></i></a>
+        <a href="#" aria-label="RSS" style="color:#888; font-size:1.2rem; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><i class="ri-rss-fill"></i></a>
+      </div>
+    </div>
+
+    <!-- 5-column links grid -->
+    <div style="max-width:1200px; margin:0 auto; padding:40px 20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:32px; border-bottom:1px solid #2a2a2a;">
+
+      <div>
+        <h4 style="font-family:var(--font-sans); font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#fff; margin:0 0 16px;">Sections</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="category.html?cat=world"         style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">World</a></li>
+          <li><a href="category.html?cat=politics"      style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Politics</a></li>
+          <li><a href="category.html?cat=business"      style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Business</a></li>
+          <li><a href="category.html?cat=technology"    style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Technology</a></li>
+          <li><a href="category.html?cat=science"       style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Science</a></li>
+          <li><a href="category.html?cat=health"        style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Health</a></li>
+          <li><a href="category.html?cat=sports"        style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Sports</a></li>
+          <li><a href="category.html?cat=entertainment" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Entertainment</a></li>
+          <li><a href="category.html?cat=opinion"       style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Opinion</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family:var(--font-sans); font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#fff; margin:0 0 16px;">About</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Our Mission</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">History</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Masthead</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Ethics Policy</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Corrections</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Accessibility</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">DEI Report</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family:var(--font-sans); font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#fff; margin:0 0 16px;">Editorial Board</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Editor-in-Chief</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Managing Editors</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Correspondents</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Opinion Writers</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Photography</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Graphics Desk</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family:var(--font-sans); font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#fff; margin:0 0 16px;">Contact</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Newsroom</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Letters to the Editor</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Tips &amp; Leaks</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Advertising</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Licensing</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Reprints</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family:var(--font-sans); font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#fff; margin:0 0 16px;">Products</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Digital Subscription</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">E-Paper</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Insight App</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Podcasts</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Newsletters</a></li>
+          <li><a href="bookmarks.html" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">My Saved Articles</a></li>
+          <li><a href="#" style="color:#999; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Gift Subscription</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="max-width:1200px; margin:0 auto; padding:20px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <p style="font-family:var(--font-sans); font-size:0.75rem; color:#555; margin:0;">&copy; 2026 Insight Bharat. All rights reserved. Est. 2022.</p>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <a href="#" style="font-family:var(--font-sans); font-size:0.75rem; color:#555; text-decoration:none;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Privacy Policy</a>
+        <a href="#" style="font-family:var(--font-sans); font-size:0.75rem; color:#555; text-decoration:none;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Terms of Service</a>
+        <a href="#" style="font-family:var(--font-sans); font-size:0.75rem; color:#555; text-decoration:none;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Cookie Settings</a>
+        <a href="#" style="font-family:var(--font-sans); font-size:0.75rem; color:#555; text-decoration:none;" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='#555'">Sitemap</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <button class="search-overlay-close" id="search-close-btn" aria-label="Close overlay">&times;</button>
+    <div class="search-overlay-content">
+      <div class="search-overlay-input-wrap">
+        <input type="text" class="search-overlay-input" id="search-input" placeholder="Search the archive...">
+        <button class="search-overlay-btn" id="search-submit-btn" aria-label="Submit query">
+          <i class="ri-search-line"></i>
+        </button>
+      </div>
+      <div id="search-history-box" style="margin-bottom: 20px; display: none;">
+        <p class="search-suggestions-title">Recent Searches</p>
+        <div class="search-suggestions-tags" id="recent-searches-container" style="margin-bottom: 20px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+      <p class="search-suggestions-title">Trending Editorial Topics</p>
+      <div class="search-suggestions-tags">
+        <span class="suggestion-tag">Climate Alliance</span>
+        <span class="suggestion-tag">Semiconductors</span>
+        <span class="suggestion-tag">UPI record</span>
+        <span class="suggestion-tag">ISRO Gaganyaan</span>
+        <span class="suggestion-tag">Global Inflation</span>
+        <span class="suggestion-tag">Cannes Indie Films</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Bottom Nav -->
+  <div class="mobile-nav">
+    <ul class="mobile-nav-bar">
+      <li class="mobile-nav-item active">
+        <a href="index.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-home-line"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="category.html?cat=technology" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-grid-line"></i>
+          <span>Sections</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item" id="mobile-search-trigger">
+        <a href="#" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-search-line"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="bookmarks.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-bookmark-line"></i>
+          <span>Saved</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item" id="mobile-profile-item">
+        <a href="login.html" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <i class="ri-user-line"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

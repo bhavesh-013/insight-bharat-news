@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Access your premium Insight Samachar digital newspaper account.">
+  <title>Login | Insight Samachar</title>
+  
+  <!-- Remix Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="auth-page">
+  <div class="auth-wrapper fade-in">
+    <!-- Centered Login Card -->
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <a href="index.html" class="auth-logo">Insight Samachar</a>
+        <p class="auth-tagline">Truth Beyond Headlines</p>
+        <div class="auth-edition-line">
+          <span>Morning Edition</span>
+          <span>•</span>
+          <span id="current-date">Friday, June 12, 2026</span>
+        </div>
+      </div>
+      
+      <div class="auth-card-body">
+        <h2 class="auth-title">Sign In to Your Edition</h2>
+        <p class="auth-subtitle">Enjoy unlimited articles, customized feeds, and bookmarks.</p>
+        
+        <!-- Error Banner -->
+        <div class="auth-error-banner" id="auth-error-banner">
+          <i class="ri-error-warning-line"></i>
+          <span id="error-message">Invalid email or password.</span>
+        </div>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <div class="form-input-wrapper">
+              <i class="ri-mail-line input-icon"></i>
+              <input type="email" id="email" class="input-field" placeholder="editor@insightsamachar.com" required>
+            </div>
+            <span class="error-text" id="email-error">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="password" class="form-label">Password</label>
+              <a href="#" class="forgot-link" id="forgot-password">Forgot Password?</a>
+            </div>
+            <div class="form-input-wrapper">
+              <i class="ri-lock-line input-icon"></i>
+              <input type="password" id="password" class="input-field" placeholder="••••••••" required>
+              <button type="button" class="password-toggle" id="password-toggle" aria-label="Toggle Password Visibility">
+                <i class="ri-eye-off-line" id="toggle-icon"></i>
+              </button>
+            </div>
+            <span class="error-text" id="password-error">Password must be at least 6 characters long.</span>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="remember-me">
+              <span class="checkmark"></span>
+              Remember me
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block auth-submit-btn">
+            Authenticate & Open <i class="ri-arrow-right-line"></i>
+          </button>
+        </form>
+
+        <div class="auth-divider">
+          <span>OR</span>
+        </div>
+
+        <div class="social-login-buttons">
+          <button type="button" class="btn btn-secondary btn-block social-btn" id="google-login-btn">
+            <img src="https://lh3.googleusercontent.com/COxitqgJr1sIC564be51pa5n2x5oDX5c44OaiTyYJD5CO34w85352cPpPQezCwOm62gG" alt="Google" class="google-logo"> Continue with Google
+          </button>
+          <a href="index.html" class="btn btn-secondary btn-block guest-btn" id="guest-btn">
+            <i class="ri-user-shared-line"></i> Read as Guest
+          </a>
+        </div>
+      </div>
+
+      <div class="auth-card-footer">
+        <p>New reader? <a href="signup.html" class="auth-link">Create an Account</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
