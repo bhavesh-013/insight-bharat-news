@@ -260,26 +260,43 @@ function showSourceBadge(articles) {
   badge.style.display = 'inline-flex';
 }
 
+/* ─── Shared helper: wire all article links in a container to save before nav ── */
+function bindArticleLinks(container, articles) {
+  const links = container.querySelectorAll('a[href^="article.html"]');
+  links.forEach(link => {
+    const url = link.getAttribute('href');
+    const idMatch = url && url.match(/[?&]id=([^&]+)/);
+    if (!idMatch) return;
+    const id  = idMatch[1];
+    const art = articles.find(a => a.id === id);
+    if (!art) return;
+    link.addEventListener('click', (e) => {
+      // Save article data before the page navigates away
+      apiService.saveArticleToSession(art);
+    });
+  });
+}
+
 function renderHero(art, container) {
   if (!art || !container) return;
   const publishedDate = new Date(art.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   const isBookmarked = isArticleBookmarked(art.id);
-  
+
   container.innerHTML = `
     <div class="image-container hero-image-container">
-      <img src="${art.urlToImage || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&auto=format&fit=crop&q=80'}" alt="${art.title}">
+      <img src="${art.urlToImage || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&auto=format&fit=crop&q=80'}" alt="${art.title}" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&auto=format&fit=crop&q=80'">
     </div>
     <div class="hero-content">
       <span class="category-badge">${art.category}</span>
       <h2 class="hero-title"><a href="article.html?id=${art.id}">${art.title}</a></h2>
       <p class="hero-summary">${art.description || 'Editorial dispatch from Insight Samachar covering key policies, events, and strategic updates in global affairs.'}</p>
-      
+
       <div style="font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px;">
-        By <strong style="color: var(--text-primary);">${art.author || 'Staff Reporter'}</strong> 
+        By <strong style="color: var(--text-primary);">${art.author || 'Staff Reporter'}</strong>
         <span>•</span> ${publishedDate}
         <span>•</span> <i class="ri-time-line"></i> ${art.readingTime || '4 min read'}
       </div>
-      
+
       <div class="hero-actions">
         <a href="article.html?id=${art.id}" class="btn btn-primary">Read Full Story</a>
         <button class="bookmark-icon-btn ${isBookmarked ? 'active' : ''}" data-id="${art.id}" aria-label="Bookmark article">
@@ -289,7 +306,7 @@ function renderHero(art, container) {
     </div>
   `;
 
-  // Bind Bookmark click
+  bindArticleLinks(container, [art]);
   container.querySelector('.bookmark-icon-btn').addEventListener('click', (e) => {
     toggleBookmarkState(art, e.currentTarget);
   });
@@ -310,7 +327,7 @@ function renderPicks(articles, container) {
     card.className = 'paper-card';
     card.innerHTML = `
       <div class="image-container" style="margin-bottom: 12px;">
-        <img src="${art.urlToImage || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'}" alt="${art.title}">
+        <img src="${art.urlToImage || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'}" alt="${art.title}" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'">
       </div>
       <span class="category-badge">${art.category}</span>
       <h3 class="card-title" style="font-size: 1.05rem; margin-bottom: 8px;">
@@ -324,7 +341,8 @@ function renderPicks(articles, container) {
         <i class="${isBookmarked ? 'ri-bookmark-fill' : 'ri-bookmark-line'}"></i>
       </button>
     `;
-    
+
+    bindArticleLinks(card, [art]);
     card.querySelector('.bookmark-icon-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       toggleBookmarkState(art, e.currentTarget);
@@ -339,7 +357,6 @@ function renderLeftColumn(articles, container) {
   container.innerHTML = '';
 
   articles.forEach(art => {
-    const isBookmarked = isArticleBookmarked(art.id);
     const item = document.createElement('div');
     item.className = 'paper-card';
     item.style.paddingBottom = '15px';
@@ -352,6 +369,7 @@ function renderLeftColumn(articles, container) {
         <span>${art.readingTime || '4 min'}</span>
       </div>
     `;
+    bindArticleLinks(item, [art]);
     container.appendChild(item);
   });
 }
@@ -366,7 +384,6 @@ function renderCenterColumn(articles, container) {
     if (idx < articles.length - 1) {
       item.style.borderBottom = '1px dashed var(--border-color)';
     }
-    
     item.innerHTML = `
       <span class="category-badge" style="font-size:0.65rem; margin-bottom: 4px;">${art.category}</span>
       <h3 class="card-title" style="font-size: 1.1rem; line-height:1.2; margin-bottom: 6px;">
@@ -379,6 +396,7 @@ function renderCenterColumn(articles, container) {
         By ${art.author || 'Press Dispatch'} • ${art.readingTime}
       </div>
     `;
+    bindArticleLinks(item, [art]);
     container.appendChild(item);
   });
 }
@@ -387,13 +405,27 @@ function renderTicker(articles, container) {
   if (!container) return;
   container.innerHTML = '';
 
-  // Duplicate items to ensure infinite marquee width
+  // Duplicate items for seamless infinite scroll
   const scrollList = [...articles, ...articles];
   scrollList.forEach(art => {
     const span = document.createElement('span');
     span.className = 'ticker-item';
     span.style.cssText = 'color:#e5e5e5; font-family:var(--font-sans); font-size:0.78rem; font-weight:500; letter-spacing:0.01em; white-space:nowrap; padding:0 6px;';
-    span.innerHTML = `<a href="article.html?id=${art.id}" style="color:#e5e5e5; text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#e5e5e5'">${art.title}</a><span style="color:#8b0000; margin-left:18px; font-size:0.55rem; vertical-align:middle;">&#9670;</span>`;
+
+    const link = document.createElement('a');
+    link.href  = `article.html?id=${art.id}`;
+    link.textContent = art.title;
+    link.style.cssText = 'color:#e5e5e5; text-decoration:none;';
+    link.addEventListener('mouseover', () => link.style.color = '#fff');
+    link.addEventListener('mouseout',  () => link.style.color = '#e5e5e5');
+    link.addEventListener('click', () => apiService.saveArticleToSession(art));
+
+    const dot = document.createElement('span');
+    dot.innerHTML  = '&#9670;';
+    dot.style.cssText = 'color:#8b0000; margin-left:18px; font-size:0.55rem; vertical-align:middle;';
+
+    span.appendChild(link);
+    span.appendChild(dot);
     container.appendChild(span);
   });
 }

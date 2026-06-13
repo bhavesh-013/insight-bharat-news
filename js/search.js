@@ -171,8 +171,15 @@ async function triggerSearch(query) {
         toggleBookmarkState(art, e.currentTarget);
       });
 
+      // Save article data before navigating so article.html picks up the right content
+      const artLink = card.querySelector('a[href^="article.html"]');
+      if (artLink) {
+        artLink.addEventListener('click', () => apiService.saveArticleToSession(art));
+      }
+
       resultsGrid.appendChild(card);
     });
+
 
   } catch (err) {
     console.error('[Search] Unexpected error:', err);

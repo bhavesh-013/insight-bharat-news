@@ -189,7 +189,7 @@ function renderPaginatedGrid(state) {
   pagedArticles.forEach(art => {
     const isBookmarked = isArticleBookmarked(art.id);
     const publishedDate = new Date(art.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    
+
     const card = document.createElement('div');
     card.className = 'paper-card';
     card.innerHTML = `
@@ -210,12 +210,19 @@ function renderPaginatedGrid(state) {
       </button>
     `;
 
+    // Save article to session before navigating so article.html always shows correct content
+    const artLink = card.querySelector('a[href^="article.html"]');
+    if (artLink) {
+      artLink.addEventListener('click', () => apiService.saveArticleToSession(art));
+    }
+
     card.querySelector('.bookmark-icon-btn').addEventListener('click', (e) => {
       toggleBookmarkState(art, e.currentTarget);
     });
 
     grid.appendChild(card);
   });
+
 
   // Update controls and numbers
   updatePaginationControls(state);

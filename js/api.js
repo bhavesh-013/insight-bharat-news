@@ -354,31 +354,52 @@ isUsingRealAPI() {
    * Checks mock DB first, then memory cache, then tries to reload its category.
    */
   async fetchArticleById(id) {
-    // 1. Mock DB
+    // 0. SessionStorage — set by cards before navigating (most reliable for live articles)
+    const sessionKey = `insight_article_${id}`;
+    const cached = sessionStorage.getItem(sessionKey);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        if (parsed && parsed.id === id) return parsed;
+      } catch (_) { /* ignore corrupt entry */ }
+    }
+
+    // 1. Mock editorial DB
     const mockMatch = EDITORIAL_MOCK_DATABASE.find(art => art.id === id);
     if (mockMatch) return mockMatch;
 
-    // 2. Memory cache
+    // 2. In-memory cache (same session, same page won't help cross-page, but keep it)
     for (const key in this.cache) {
       const match = this.cache[key].find(art => art.id === id);
       if (match) return match;
     }
 
-    // 3. Attempt to reload the category pool for live articles
+    // 3. Re-fetch from live API (last resort)
     if (id && id.startsWith('live-')) {
-      const parts = id.split('-');
+      const parts    = id.split('-');
       const category = parts[1] || '';
       try {
         const articles = await this.fetchTopHeadlines(category === 'general' ? '' : category);
-        const match = articles.find(art => art.id === id);
+        const match    = articles.find(art => art.id === id);
         if (match) return match;
       } catch (e) {
         console.error('[NewsAPI] Could not retrieve live article details', e);
       }
     }
 
-    // 4. Safe default
+    // 4. Final fallback
     return EDITORIAL_MOCK_DATABASE[0];
+  }
+
+  /**
+   * Persist an article object to sessionStorage so article.html can
+   * retrieve it without re-fetching (avoids order-change bug with live API).
+   */
+  saveArticleToSession(art) {
+    if (!art || !art.id) return;
+    try {
+      sessionStorage.setItem(`insight_article_${art.id}`, JSON.stringify(art));
+    } catch (_) { /* storage full / private mode */ }
   }
 
   /* ── Internal helpers ────────────────────────────────────────────────────── */
