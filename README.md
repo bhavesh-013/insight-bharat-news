@@ -5,6 +5,7 @@
 Insight Bharat is a premium editorial-style news application inspired by traditional newspapers and powered by **NewsAPI**. It delivers live headlines, category-based news, keyword search, bookmarking, and a responsive newspaper reading experience.
 
 ---
+Live - https://insight-bharat.netlify.app/
 
 ## ✨ Features
 
